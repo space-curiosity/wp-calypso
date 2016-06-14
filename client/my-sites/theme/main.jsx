@@ -103,7 +103,7 @@ const ThemeSheet = React.createClass( {
 		if ( ! this.props.isLoggedIn ) {
 			this.props.signup( this.props );
 		} else {
-			this.selectSiteAndDispatch( 'customize' );
+			this.selectSiteAndDispatch( 'activate' );
 		}
 	},
 
@@ -269,7 +269,7 @@ const ThemeSheet = React.createClass( {
 	},
 
 	renderPreview() {
-		const buttonLabel = this.props.isLoggedIn ? i18n.translate( 'Try & Customize' ) : i18n.translate( 'Pick this design' );
+		const buttonLabel = i18n.translate( 'Pick this design' );
 		return(
 			<ThemePreview showPreview={ this.state.showPreview }
 				theme={ this.props }
