@@ -102,7 +102,7 @@ const ThemesSingleSite = React.createClass( {
 	onPreviewButtonClick( theme ) {
 		this.setState( { showPreview: false },
 			() => {
-				this.props.customize( theme );
+				this.props.activate( theme );
 			} );
 	},
 
@@ -143,9 +143,7 @@ const ThemesSingleSite = React.createClass( {
 					<ThemePreview showPreview={ this.state.showPreview }
 						theme={ this.state.previewingTheme }
 						onClose={ this.togglePreview }
-						buttonLabel={ this.translate( 'Try & Customize', {
-							context: 'when previewing a theme demo, this button opens the Customizer with the previewed theme'
-						} ) }
+						buttonLabel={ this.translate( 'Pick this design' ) }
 						onButtonClick={ this.onPreviewButtonClick } />
 				}
 				<ThanksModal
