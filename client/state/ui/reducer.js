@@ -13,6 +13,7 @@ import {
 	DESERIALIZE,
 } from 'state/action-types';
 import editor from './editor/reducer';
+import firstView from './first-view/reducer';
 import guidedTour from './guided-tours/reducer';
 import reader from './reader/reducer';
 import olark from './olark/reducer';
@@ -84,6 +85,7 @@ const reducer = combineReducers( {
 	hasSidebar,
 	selectedSiteId,
 	recentlySelectedSiteIds,
+	firstView,
 	guidedTour,
 	editor,
 	reader,
