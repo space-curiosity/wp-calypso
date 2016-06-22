@@ -22,6 +22,9 @@ import {
 	ActionStep,
 } from './steps';
 import wait from './wait';
+import QueryPreferences from 'components/data/query-preferences';
+import { setPreference } from 'state/preferences/actions';
+import { getPreference } from 'state/preferences/selectors';
 
 const debug = debugFactory( 'calypso:guided-tours' );
 
@@ -41,7 +44,8 @@ class GuidedTours extends Component {
 	}
 
 	shouldComponentUpdate( nextProps ) {
-		return this.props.tourState !== nextProps.tourState;
+		return this.props.tourState !== nextProps.tourState ||
+			this.props.guidedToursHistory !== nextProps.guidedToursHistory;
 	}
 
 	componentWillUpdate( nextProps ) {
@@ -69,7 +73,7 @@ class GuidedTours extends Component {
 
 		const nextTargetFound = () => {
 			if ( nextStepConfig && nextStepConfig.target ) {
-				const target = this.getTipTargets()[nextStepConfig.target];
+				const target = this.getTipTargets()[ nextStepConfig.target ];
 				return target && target.getBoundingClientRect().left >= 0;
 			}
 			return true;
@@ -121,6 +125,7 @@ class GuidedTours extends Component {
 
 		return (
 			<div className="guided-tours">
+				<QueryPreferences />
 				<StepComponent
 					{ ...stepConfig }
 					key={ stepConfig.target }
@@ -135,8 +140,10 @@ class GuidedTours extends Component {
 
 export default connect( ( state ) => ( {
 	tourState: getGuidedTourState( state ),
+	guidedToursHistory: getPreference( state, 'guided-tours-history' ),
 } ), {
 	nextGuidedTourStep,
 	quitGuidedTour,
 	errorNotice,
+	setGuidedToursHistory: setPreference.bind( null, 'guided-tours-history' ),
 } )( localize( GuidedTours ) );
