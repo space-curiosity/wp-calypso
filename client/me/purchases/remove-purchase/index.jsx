@@ -45,22 +45,22 @@ const RemovePurchase = React.createClass( {
 	},
 
 	getInitialState() {
-		// shuffle reason order, but keep another_reason_one last
+		// shuffle reason order, but keep anotherReasonOne last
 		const questionOneOrder = shuffle( [
-			'could_not_install',
-			'too_hard',
-			'did_not_include',
-			'only_need_free'
+			'couldNotInstall',
+			'tooHard',
+			'didNotInclude',
+			'onlyNeedFree'
 		] );
-		questionOneOrder.push( 'another_reason_one' );
+		questionOneOrder.push( 'anotherReasonOne' );
 
 		const questionTwoOrder = shuffle( [
-			'staying_here',
-			'other_wordpress',
-			'different_service',
-			'no_need'
+			'stayingHere',
+			'otherWordPress',
+			'differentService',
+			'noNeed'
 		] );
-		questionTwoOrder.push( 'another_reason_two' );
+		questionTwoOrder.push( 'anotherReasonTwo' );
 
 		return {
 			isDialogVisible: false,
@@ -365,230 +365,230 @@ const RemovePurchase = React.createClass( {
 
 	renderQuestionOne() {
 		const reasons = {},
-			ordered_reasons = [];
+			orderedReasons = [];
 
-		const could_not_install_input = (
+		const couldNotInstallInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="could_not_install_input"
-				id="could_not_install_input"
+				name="couldNotInstallInput"
+				id="couldNotInstallInput"
 				value={ this.state.questionOneText }
 				onChange={ this.handleTextOne }
 				placeholder={ this.translate( 'What plugin/theme were you trying to install?' ) } />
 		);
-		reasons.could_not_install = (
-			<FormLabel key="could_not_install">
+		reasons.couldNotInstall = (
+			<FormLabel key="couldNotInstall">
 				<FormRadio
-					name="could_not_install"
-					value="could_not_install"
-					checked={ 'could_not_install' === this.state.questionOneRadio }
+					name="couldNotInstall"
+					value="couldNotInstall"
+					checked={ 'couldNotInstall' === this.state.questionOneRadio }
 					onChange={ this.handleRadioOne } />
 				<span>{ this.translate( 'I couldn\'t install a plugin/theme I wanted.' ) }</span>
-				{ 'could_not_install' === this.state.questionOneRadio ? could_not_install_input : null }
+				{ 'couldNotInstall' === this.state.questionOneRadio ? couldNotInstallInput : null }
 			</FormLabel>
 		);
 
-		const too_hard_input = (
+		const tooHardInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="too_hard_input"
-				id="too_hard_input"
+				name="tooHardInput"
+				id="tooHardInput"
 				value={ this.state.questionOneText }
 				onChange={ this.handleTextOne }
 				placeholder={ this.translate( 'Where did you run into problems?' ) } />
 		);
-		reasons.too_hard = (
-			<FormLabel key="too_hard">
+		reasons.tooHard = (
+			<FormLabel key="tooHard">
 				<FormRadio
-					name="too_hard"
-					value="too_hard"
-					checked={ 'too_hard' === this.state.questionOneRadio }
+					name="tooHard"
+					value="tooHard"
+					checked={ 'tooHard' === this.state.questionOneRadio }
 					onChange={ this.handleRadioOne } />
 				<span>{ this.translate( 'It was too hard to set up my site.' ) }</span>
-				{ 'too_hard' === this.state.questionOneRadio ? too_hard_input : null }
+				{ 'tooHard' === this.state.questionOneRadio ? tooHardInput : null }
 			</FormLabel>
 		);
 
-		const did_not_include_input = (
+		const didNotIncludeInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="did_not_include_input"
-				id="did_not_include_input"
+				name="didNotIncludeInput"
+				id="didNotIncludeInput"
 				value={ this.state.questionOneText }
 				onChange={ this.handleTextOne }
 				placeholder={ this.translate( 'What are we missing that you need?' ) } />
 		);
-		reasons.did_not_include = (
-			<FormLabel key="did_not_include">
+		reasons.didNotInclude = (
+			<FormLabel key="didNotInclude">
 				<FormRadio
-					name="did_not_include"
-					value="did_not_include"
-					checked={ 'did_not_include' === this.state.questionOneRadio }
+					name="didNotInclude"
+					value="didNotInclude"
+					checked={ 'didNotInclude' === this.state.questionOneRadio }
 					onChange={ this.handleRadioOne } />
 				<span>{ this.translate( 'This upgrade didn\'t include what I needed.' ) }</span>
-				{ 'did_not_include' === this.state.questionOneRadio ? did_not_include_input : null }
+				{ 'didNotInclude' === this.state.questionOneRadio ? didNotIncludeInput : null }
 			</FormLabel>
 		);
 
-		const only_need_free_input = (
+		const onlyNeedFreeInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="only_need_free_input"
-				id="only_need_free_input"
+				name="onlyNeedFreeInput"
+				id="onlyNeedFreeInput"
 				value={ this.state.questionOneText }
 				onChange={ this.handleTextOne }
-				placeholder={ this.translate( 'Is there anything we can do to improve our upgrades?' ) } />
+				placeholder={ this.translate( 'How can we improve our upgrades?' ) } />
 		);
-		reasons.only_need_free = (
-			<FormLabel key="only_need_free">
+		reasons.onlyNeedFree = (
+			<FormLabel key="onlyNeedFree">
 				<FormRadio
-					name="only_need_free"
-					value="only_need_free"
-					checked={ 'only_need_free' === this.state.questionOneRadio }
+					name="onlyNeedFree"
+					value="onlyNeedFree"
+					checked={ 'onlyNeedFree' === this.state.questionOneRadio }
 					onChange={ this.handleRadioOne } />
 				<span>{ this.translate( 'All I need is the free plan.' ) }</span>
-				{ 'only_need_free' === this.state.questionOneRadio ? only_need_free_input : null }
+				{ 'onlyNeedFree' === this.state.questionOneRadio ? onlyNeedFreeInput : null }
 			</FormLabel>
 		);
 
-		const another_reason_one_input = (
+		const anotherReasonOneInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="another_reason_one_input"
+				name="anotherReasonOneInput"
 				value={ this.state.questionOneText }
 				onChange={ this.handleTextOne }
-				id="another_reason_one_input" />
+				id="anotherReasonOneInput" />
 		);
-		reasons.another_reason_one = (
-			<FormLabel key="another_reason_one">
+		reasons.anotherReasonOne = (
+			<FormLabel key="anotherReasonOne">
 				<FormRadio
-					name="another_reason_one"
-					value="another_reason_one"
-					checked={ 'another_reason_one' === this.state.questionOneRadio }
+					name="anotherReasonOne"
+					value="anotherReasonOne"
+					checked={ 'anotherReasonOne' === this.state.questionOneRadio }
 					onChange={ this.handleRadioOne } />
 				<span>{ this.translate( 'Another reason…' ) }</span>
-				{ 'another_reason_one' === this.state.questionOneRadio ? another_reason_one_input : null }
+				{ 'anotherReasonOne' === this.state.questionOneRadio ? anotherReasonOneInput : null }
 			</FormLabel>
 		);
 
 		for ( let i in this.state.questionOneOrder ) {
-			ordered_reasons.push( reasons[ this.state.questionOneOrder[ i ] ] );
+			orderedReasons.push( reasons[ this.state.questionOneOrder[ i ] ] );
 		}
 
 		return (
 			<div>
 				<FormLegend>{ this.translate( 'Please tell us why you are canceling:' ) }</FormLegend>
-				{ ordered_reasons }
+				{ orderedReasons }
 			</div>
 		);
 	},
 
 	renderQuestionTwo() {
 		const reasons = {},
-			ordered_reasons = [];
+			orderedReasons = [];
 
-		reasons.staying_here = (
-			<FormLabel key="staying_here">
+		reasons.stayingHere = (
+			<FormLabel key="stayingHere">
 				<FormRadio
-					name="staying_here"
-					value="staying_here"
-					checked={ 'staying_here' === this.state.questionTwoRadio }
+					name="stayingHere"
+					value="stayingHere"
+					checked={ 'stayingHere' === this.state.questionTwoRadio }
 					onChange={ this.handleRadioTwo } />
 				<span>{ this.translate( 'I\'m staying here and using the free plan.' ) }</span>
 			</FormLabel>
 		);
 
-		const other_wordpress_input = (
+		const otherWordPressInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="other_wordpress_input"
-				id="other_wordpress_input"
+				name="otherWordPressInput"
+				id="otherWordPressInput"
 				value={ this.state.questionTwoText }
 				onChange={ this.handleTextTwo }
 				placeholder={ this.translate( 'Mind telling us where?' ) } />
 		);
-		reasons.other_wordpress = (
-			<FormLabel key="other_wordpress">
+		reasons.otherWordPress = (
+			<FormLabel key="otherWordPress">
 				<FormRadio
-					name="other_wordpress"
-					value="other_wordpress"
-					checked={ 'other_wordpress' === this.state.questionTwoRadio }
+					name="otherWordPress"
+					value="otherWordPress"
+					checked={ 'otherWordPress' === this.state.questionTwoRadio }
 					onChange={ this.handleRadioTwo } />
 				<span>{ this.translate( 'I\'m going to use WordPress somewhere else.' ) }</span>
-				{ 'other_wordpress' === this.state.questionTwoRadio ? other_wordpress_input : null }
+				{ 'otherWordPress' === this.state.questionTwoRadio ? otherWordPressInput : null }
 			</FormLabel>
 		);
 
-		const different_service_input = (
+		const differentServiceInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="different_service_input"
-				id="different_service_input"
+				name="differentServiceInput"
+				id="differentServiceInput"
 				value={ this.state.questionTwoText }
 				onChange={ this.handleTextTwo }
 				placeholder={ this.translate( 'Mind telling us which one?' ) } />
 		);
-		reasons.different_service = (
-			<FormLabel key="different_service">
+		reasons.differentService = (
+			<FormLabel key="differentService">
 				<FormRadio
-					name="different_service"
-					value="different_service"
-					checked={ 'different_service' === this.state.questionTwoRadio }
+					name="differentService"
+					value="differentService"
+					checked={ 'differentService' === this.state.questionTwoRadio }
 					onChange={ this.handleRadioTwo } />
 				<span>{ this.translate( 'I\'m going to use a different service for my website or blog.' ) }</span>
-				{ 'different_service' === this.state.questionTwoRadio ? different_service_input : null }
+				{ 'differentService' === this.state.questionTwoRadio ? differentServiceInput : null }
 			</FormLabel>
 		);
 
-		const no_need_input = (
+		const noNeedInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="no_need_input"
-				id="no_need_input"
+				name="noNeedInput"
+				id="noNeedInput"
 				value={ this.state.questionTwoText }
 				onChange={ this.handleTextTwo }
 				placeholder={ this.translate( 'What will you do instead?' ) } />
 		);
-		reasons.no_need = (
-			<FormLabel key="no_need">
+		reasons.noNeed = (
+			<FormLabel key="noNeed">
 				<FormRadio
-					name="no_need"
-					value="no_need"
-					checked={ 'no_need' === this.state.questionTwoRadio }
+					name="noNeed"
+					value="noNeed"
+					checked={ 'noNeed' === this.state.questionTwoRadio }
 					onChange={ this.handleRadioTwo } />
 				<span>{ this.translate( 'I no longer need a website or blog.' ) }</span>
-				{ 'no_need' === this.state.questionTwoRadio ? no_need_input : null }
+				{ 'noNeed' === this.state.questionTwoRadio ? noNeedInput : null }
 			</FormLabel>
 		);
 
-		const another_reason_two_input = (
+		const anotherReasonTwoInput = (
 			<FormTextInput
 				className="remove-purchase__reason-input"
-				name="another_reason_two_input"
+				name="anotherReasonTwoInput"
 				value={ this.state.questionTwoText }
 				onChange={ this.handleTextTwo }
-				id="another_reason_two_input" />
+				id="anotherReasonTwoInput" />
 		);
-		reasons.another_reason_two = (
-			<FormLabel key="another_reason_two">
+		reasons.anotherReasonTwo = (
+			<FormLabel key="anotherReasonTwo">
 				<FormRadio
-					name="another_reason_two"
-					value="another_reason_two"
-					checked={ 'another_reason_two' === this.state.questionTwoRadio }
+					name="anotherReasonTwo"
+					value="anotherReasonTwo"
+					checked={ 'anotherReasonTwo' === this.state.questionTwoRadio }
 					onChange={ this.handleRadioTwo } />
 				<span>{ this.translate( 'Another reason…' ) }</span>
-				{ 'another_reason_two' === this.state.questionTwoRadio ? another_reason_two_input : null }
+				{ 'anotherReasonTwo' === this.state.questionTwoRadio ? anotherReasonTwoInput : null }
 			</FormLabel>
 		);
 
 		for ( let i in this.state.questionTwoOrder ) {
-			ordered_reasons.push( reasons[ this.state.questionTwoOrder[ i ] ] );
+			orderedReasons.push( reasons[ this.state.questionTwoOrder[ i ] ] );
 		}
 
 		return (
 			<div>
 				<FormLegend>{ this.translate( 'Where is your next adventure taking you?' ) }</FormLegend>
-				{ ordered_reasons }
+				{ orderedReasons }
 			</div>
 		);
 	},
@@ -599,8 +599,8 @@ const RemovePurchase = React.createClass( {
 				<FormLabel>
 					{ this.translate( 'What\'s one thing we could have done better? (optional)' ) }
 					<FormTextarea
-						name="improvement_input"
-						id="improvement_input"
+						name="improvementInput"
+						id="improvementInput"
 						value={ this.state.questionThreeText }
 						onChange={ this.handleTextThree } />
 				</FormLabel>
