@@ -19,6 +19,7 @@ import HeaderCake from 'components/header-cake';
 import SectionHeader from 'components/section-header';
 import ThemeDownloadCard from './theme-download-card';
 import ThemesRelatedCard from './themes-related-card';
+import ThemePickButton from './theme-pick-button';
 import Button from 'components/button';
 import SectionNav from 'components/section-nav';
 import NavTabs from 'components/section-nav/tabs';
@@ -82,29 +83,25 @@ const ThemeSheet = React.createClass( {
 		this.setState( { selectedAction: null } );
 	},
 
-	isActive() {
-		const { id, currentTheme } = this.props;
-		return currentTheme && currentTheme.id === id;
+	onCustomize() {
+		this.props.customize( this.props, this.props.selectedSite );
 	},
 
-	onPrimaryClick() {
+	onPickTheme() {
 		if ( ! this.props.isLoggedIn ) {
-			this.props.signup( this.props );
-		} else if ( this.isActive() ) {
-			this.props.customize( this.props, this.props.selectedSite );
-		} else if ( this.props.price ) {
-			this.selectSiteAndDispatch( 'purchase' );
-		} else {
-			this.selectSiteAndDispatch( 'activate' );
+			return this.props.signup( this.props );
 		}
+		this.selectSiteAndDispatch( 'activate' );
 	},
 
 	onPreviewButtonClick() {
 		if ( ! this.props.isLoggedIn ) {
-			this.props.signup( this.props );
-		} else {
-			this.selectSiteAndDispatch( 'activate' );
+			return this.props.signup( this.props );
+		} else if ( isPremium( this.props ) ) {
+			// TODO: check theme is not already purchased
+			return this.selectSiteAndDispatch( 'purchase' );
 		}
+		this.selectSiteAndDispatch( 'activate' );
 	},
 
 	selectSiteAndDispatch( action ) {
@@ -305,15 +302,7 @@ const ThemeSheet = React.createClass( {
 	},
 
 	renderSheet() {
-		let actionTitle = <span className="themes__sheet-button-placeholder">loading......</span>;
-		if ( this.isActive() ) {
-			actionTitle = i18n.translate( 'Customize' );
-		} else if ( this.props.name ) {
-			actionTitle = i18n.translate( 'Pick this design' );
-		}
-
 		const section = this.validateSection( this.props.section );
-		const priceElement = <span className="themes__sheet-action-bar-cost">{ this.props.price }</span>;
 		const siteID = this.props.selectedSite && this.props.selectedSite.ID;
 
 		const analyticsPath = `/theme/:slug${ section ? '/' + section : '' }${ siteID ? '/:site_id' : '' }`;
@@ -340,10 +329,13 @@ const ThemeSheet = React.createClass( {
 				<HeaderCake className="themes__sheet-action-bar"
 							backHref={ this.props.backPath }
 							backText={ i18n.translate( 'All Themes' ) }>
-					<Button className="themes__sheet-primary-button" onClick={ this.onPrimaryClick }>
-						{ actionTitle }
-						{ ! this.isActive() && priceElement }
-					</Button>
+					<ThemePickButton
+						price={ this.props.price }
+						themeId={ this.props.id }
+						currentTheme={ this.props.currentTheme }
+						onPickTheme={ this.onPickTheme }
+						onCustomize={ this.onCustomize }
+					/>
 				</HeaderCake>
 				<div className="themes__sheet-columns">
 					<div className="themes__sheet-column-left">
