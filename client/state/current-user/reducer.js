@@ -22,7 +22,7 @@ import { idSchema, capabilitiesSchema } from './schema';
  * @return {Object}        Updated state
  */
 export const id = createReducer( null, {
-	[ CURRENT_USER_ID_SET ]: ( state, action ) => action.userId
+	[CURRENT_USER_ID_SET]: ( state, action ) => action.userId
 }, idSchema );
 
 /**
@@ -35,7 +35,7 @@ export const id = createReducer( null, {
  * @return {Object}        Updated state
  */
 export const capabilities = createReducer( {}, {
-	[ SITE_RECEIVE ]: ( state, action ) => {
+	[SITE_RECEIVE]: ( state, action ) => {
 		if ( ! action.site.capabilities ) {
 			return state;
 		}
@@ -44,7 +44,7 @@ export const capabilities = createReducer( {}, {
 			[ action.site.ID ]: action.site.capabilities
 		} );
 	},
-	[ SITES_RECEIVE ]: ( state, action ) => {
+	[SITES_RECEIVE]: ( state, action ) => {
 		const siteCapabilities = action.sites.reduce( ( memo, site ) => {
 			if ( site.capabilities ) {
 				memo[ site.ID ] = site.capabilities;
@@ -59,5 +59,5 @@ export const capabilities = createReducer( {}, {
 
 export default combineReducers( {
 	id,
-	capabilities,
+	capabilities
 } );

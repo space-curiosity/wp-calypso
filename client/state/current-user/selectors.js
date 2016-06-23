@@ -1,12 +1,8 @@
 /**
- * External dependencies
- */
-import get from 'lodash/get';
-
-/**
  * Internal dependencies
  */
 import { getUser } from 'state/users/selectors';
+import get from 'lodash/get';
 
 /**
  * Returns the user object for the current user.

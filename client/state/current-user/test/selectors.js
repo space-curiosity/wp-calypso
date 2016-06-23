@@ -9,7 +9,7 @@ import { expect } from 'chai';
 import {
 	getCurrentUser,
 	getCurrentUserLocale,
-	canCurrentUser,
+	canCurrentUser
 } from '../selectors';
 
 describe( 'selectors', () => {
