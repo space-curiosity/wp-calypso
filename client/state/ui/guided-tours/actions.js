@@ -54,7 +54,10 @@ export function quitGuidedTour( { tour = 'main', stepName, finished, error } ) {
 		error,
 	} );
 
-	return withAnalytics( trackEvent, quitAction );
+	return ( dispatch, getState ) => {
+		dispatch( withAnalytics( trackEvent, quitAction ) );
+		dispatch( addSeenGuidedTour( getState, tour, finished ) );
+	};
 }
 
 export function nextGuidedTourStep( { tour = 'main', stepName } ) {
@@ -72,14 +75,13 @@ export function nextGuidedTourStep( { tour = 'main', stepName } ) {
 	return withAnalytics( trackEvent, nextAction );
 }
 
-export function addSeenGuidedTour( tourName, finished = false ) {
-	return ( dispatch, getState ) =>
-		dispatch( setPreference( 'guided-tours-history', [
-			...getPreference( getState(), 'guided-tours-history' ),
-			{
-				timestamp: Date.now(),
-				tourName,
-				finished,
-			}
-		] ) );
+function addSeenGuidedTour( getState, tourName, finished = false ) {
+	return setPreference( 'guided-tours-history', [
+		...getPreference( getState(), 'guided-tours-history' ),
+		{
+			timestamp: Date.now(),
+			tourName,
+			finished,
+		}
+	] );
 }

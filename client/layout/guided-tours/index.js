@@ -11,7 +11,7 @@ import { localize } from 'i18n-calypso';
  */
 import scrollTo from 'lib/scroll-to';
 import { getGuidedTourState } from 'state/ui/guided-tours/selectors';
-import { nextGuidedTourStep, quitGuidedTour, addSeenGuidedTour } from 'state/ui/guided-tours/actions';
+import { nextGuidedTourStep, quitGuidedTour } from 'state/ui/guided-tours/actions';
 import { errorNotice } from 'state/notices/actions';
 import { query } from './positioning';
 import {
@@ -99,7 +99,6 @@ class GuidedTours extends Component {
 		this.props.quitGuidedTour( Object.assign( {
 			stepName: this.props.tourState.stepName,
 		}, options ) );
-		this.props.addSeenGuidedTour( this.props.tourState.tour, options.finished );
 	}
 
 	finish() {
@@ -142,5 +141,4 @@ export default connect( ( state ) => ( {
 	nextGuidedTourStep,
 	quitGuidedTour,
 	errorNotice,
-	addSeenGuidedTour,
 } )( localize( GuidedTours ) );
