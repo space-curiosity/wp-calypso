@@ -19,7 +19,7 @@ import statsStrings from '../stats-strings';
 import MostPopular from 'my-sites/stats/most-popular';
 import LatestPostSummary from '../post-performance';
 import DomainTip from 'my-sites/domain-tip';
-import FirstView from 'components/first-view';
+import FirstView from '../stats-first-view';
 import FirstViewable from 'components/first-view/first-viewable';
 import config from 'config';
 
@@ -127,9 +127,7 @@ export default React.createClass( {
 		if ( config.isEnabled( 'stats/first-view' ) ) {
 			return (
 				<FirstViewable firstViewActive={ this.state.firstViewActive } onFirstViewDismiss={ this.onFirstViewDismiss }>
-					<FirstView>
-							TODO: First view content goes here!
-					</FirstView>
+					<FirstView />
 					<SidebarNavigation />
 					<StatsNavigation section="insights" site={ site } />
 					{ content }

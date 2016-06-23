@@ -12,13 +12,13 @@ import RootChild from 'components/root-child';
 
 export default React.createClass( {
 	componentDidMount() {
-		if ( this.props.active ) {
+		if ( this.props.firstViewActive ) {
 			document.documentElement.classList.add( 'no-scroll' );
 		}
 	},
 
 	componentDidUpdate() {
-		if ( this.props.active ) {
+		if ( this.props.firstViewActive ) {
 			document.documentElement.classList.add( 'no-scroll' );
 		} else {
 			document.documentElement.classList.remove( 'no-scroll' );
@@ -31,7 +31,7 @@ export default React.createClass( {
 
 	render: function() {
 		const classes = classNames( 'wp-content', 'first-view', {
-			active: this.props.active
+			active: this.props.firstViewActive
 		} );
 
 		return (
@@ -48,8 +48,8 @@ export default React.createClass( {
 	},
 
 	onDismiss: function() {
-		if ( this.props.onDismiss ) {
-			this.props.onDismiss();
+		if ( this.props.onFirstViewDismiss ) {
+			this.props.onFirstViewDismiss();
 		}
 	}
 } );

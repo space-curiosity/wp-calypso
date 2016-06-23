@@ -33,14 +33,11 @@ export default React.createClass( {
 		const firstViewActive = this.state.firstViewActive;
 
 		const children = React.Children.map( this.props.children, function( child ) {
-			if ( child.type === FirstView ) {
-				return React.cloneElement( child, {
-					active: firstViewActive,
-					onDismiss: this.props.onFirstViewDismiss
-				} );
-			}
-
-			return child;
+			// TODO: Is there a way to only do this for 'FirstView'-derived components
+			return React.cloneElement( child, {
+				firstViewActive: firstViewActive,
+				onFirstViewDismiss: this.props.onFirstViewDismiss
+			} );
 		}, this );
 
 		const classes = classNames( 'first-viewable', {
