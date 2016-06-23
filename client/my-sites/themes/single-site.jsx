@@ -13,6 +13,7 @@ import mapValues from 'lodash/mapValues';
 import Main from 'components/main';
 import { customize, purchase, activate } from 'state/themes/actions';
 import ThemePreview from './theme-preview';
+import ThemePickButton from './theme-pick-button';
 import CurrentTheme from 'my-sites/themes/current-theme';
 import SidebarNavigation from 'my-sites/sidebar-navigation';
 import ThanksModal from 'my-sites/themes/thanks-modal';
@@ -99,10 +100,10 @@ const ThemesSingleSite = React.createClass( {
 		return merge( {}, buttonOptions, actionLabels );
 	},
 
-	onPreviewButtonClick( theme ) {
+	onPreviewButtonClick() {
 		this.setState( { showPreview: false },
 			() => {
-				this.props.activate( theme );
+				this.props.activate( this.state.previewingTheme );
 			} );
 	},
 
@@ -143,8 +144,12 @@ const ThemesSingleSite = React.createClass( {
 					<ThemePreview showPreview={ this.state.showPreview }
 						theme={ this.state.previewingTheme }
 						onClose={ this.togglePreview }
-						buttonLabel={ this.translate( 'Pick this design' ) }
-						onButtonClick={ this.onPreviewButtonClick } />
+					>
+						<ThemePickButton
+							onPickTheme={ this.onPreviewButtonClick }
+							onCustomize={ this.onPreviewButtonClick }
+						/>
+					</ThemePreview>
 				}
 				<ThanksModal
 					site={ site }
