@@ -54,11 +54,21 @@ export default React.createClass( {
 	submitForm( form, userData, analyticsData ) {
 		let flowName = this.props.flowName,
 			queryArgs = {};
-
+    console.log("I actually ran this code");
 		if ( this.props.queryObject && this.props.queryObject.jetpack_redirect ) {
 			queryArgs.jetpackRedirect = this.props.queryObject.jetpack_redirect;
 		}
 
+    var abtest = require( 'lib/abtest' ).abtest;
+    if ( abtest( 'coldStartReader' ) === 'noEmailColdStart' ) {
+      console.log("noEmailColdStart");
+      userData.follow_default_blogs = false;
+      userData.subscription_delivery_email_default = 'never';
+      userData.is_new_reader = true;
+    } else if ( abtest( 'coldStartReader') === 'noEmailNoColdStart') {
+      console.log("noEmailNoColdStart");
+      userData.subscription_delivery_email_default = 'never';
+    }
 		const formWithoutPassword = Object.assign( {}, form, {
 			password: Object.assign( {}, form.password, { value: '' } )
 		} );
