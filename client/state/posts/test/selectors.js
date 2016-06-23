@@ -212,7 +212,7 @@ describe( 'selectors', () => {
 						} )
 					}
 				}
-			}, 2916284, { search: 'Ribs', number: 1, page: 2 } );
+			}, 2916284, { search: 'Sweet', number: 1, page: 2 } );
 
 			expect( sitePosts ).to.be.null;
 		} );
