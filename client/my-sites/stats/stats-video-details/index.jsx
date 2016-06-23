@@ -32,7 +32,6 @@ module.exports = React.createClass( {
 			'is-video-details',
 			{
 				'is-loading': isLoading,
-				'is-showing-info': this.state.showInfo,
 				'has-no-data': this.props.summaryList.isEmpty()
 			}
 		];

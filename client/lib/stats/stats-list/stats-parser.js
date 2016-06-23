@@ -80,9 +80,9 @@ StatsParser.prototype.statsInsights = function( payload ) {
 			dayOfWeek = 0;
 		}
 
-		response.day = i18n.moment().day( dayOfWeek ).format( 'dddd' );
+		response.day = i18n.moment().locale( 'en' ).day( dayOfWeek ).format( 'dddd' );
 		response.percent = Math.round( payload.highest_day_percent );
-		response.hour = i18n.moment().hour( payload.highest_hour ).startOf('hour').format( 'LT' );
+		response.hour = i18n.moment().locale( 'en' ).hour( payload.highest_hour ).startOf('hour').format( 'LT' );
 		response.hour_percent = Math.round( payload.highest_hour_percent );
 
 	}
@@ -101,7 +101,7 @@ StatsParser.prototype.statsStreak = function( payload ) {
 		maxDay;
 
 	for ( timestamp in payload.data ) {
-		postDay = i18n.moment.unix( timestamp );
+		postDay = i18n.moment.unix( timestamp ).locale( 'en' );
 		datestamp = postDay.format( 'YYYY-MM-DD' );
 		if ( 'undefined' === typeof( response.days[ datestamp ] ) ) {
 			response.days[ datestamp ] = 0;
@@ -192,7 +192,7 @@ StatsParser.prototype.statsVisits = function( payload ) {
 		dataRecord.classNames = [];
 
 		if ( dataRecord.period ) {
-			date = i18n.moment( dataRecord.period, 'YYYY-MM-DD' );
+			date = i18n.moment( dataRecord.period, 'YYYY-MM-DD' ).locale( 'en' );
 			if ( date.isValid() ) {
 				dayOfWeek = date.toDate().getDay();
 				if ( ( 'day' === payload.unit ) && ( ( 6 === dayOfWeek ) || ( 0 === dayOfWeek ) ) ) {
@@ -412,7 +412,7 @@ StatsParser.prototype.statsVideo = function( payload ) {
 
 	if ( payload && payload.data ) {
 		var views = payload.data.map( function( item ) {
-			var date = i18n.moment( item[ 0 ] );
+			var date = i18n.moment( item[ 0 ] ).locale( 'en' );
 			return { period: date.format( 'MMM D' ), value: item[ 1 ] };
 		} );
 		data.data = views.slice( Math.max( views.length - 10, 1 ) );
@@ -531,7 +531,7 @@ StatsParser.prototype.statsPostViews = function( payload ) {
 	if ( payload ) {
 		if ( payload.data ) {
 			views = payload.data.map( function( item ) {
-				var date = i18n.moment( item[ 0 ] );
+				var date = i18n.moment( item[ 0 ] ).locale( 'en' );
 				return { period: date.format( 'MMM D' ), value: item[ 1 ] };
 			} );
 			data.data = views.slice( Math.max( views.length - 10, 1 ) );
@@ -638,7 +638,7 @@ StatsParser.prototype.statsTopPosts = function( payload ) {
 				inPeriod = false;
 
 			if ( item.date ) {
-				postDate = i18n.moment( item.date );
+				postDate = i18n.moment( item.date ).locale( 'en' );
 
 				if (
 					( postDate.isAfter( periodRange.startOf ) || postDate.isSame( periodRange.startOf ) ) &&
