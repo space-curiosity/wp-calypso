@@ -13,7 +13,6 @@ import {
 } from 'state/action-types';
 import { createReducer } from 'state/utils';
 import { idSchema, capabilitiesSchema } from './schema';
-import actionLog from './action-log/reducer';
 
 /**
  * Tracks the current user ID.
@@ -58,10 +57,7 @@ export const capabilities = createReducer( {}, {
 	}
 }, capabilitiesSchema );
 
-export { actionLog };
-
 export default combineReducers( {
 	id,
 	capabilities,
-	actionLog,
 } );

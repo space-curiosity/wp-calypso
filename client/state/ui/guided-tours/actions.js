@@ -12,6 +12,8 @@ import {
 } from 'state/analytics/actions';
 
 import guidedToursConfig from 'layout/guided-tours/config';
+import { setPreference } from 'state/preferences/actions';
+import { getPreference } from 'state/preferences/selectors';
 
 /**
  * Returns an action object which will be used to hide or show a specific tour.
@@ -54,6 +56,7 @@ export function quitGuidedTour( { tour = 'main', stepName, finished, error } ) {
 
 	return withAnalytics( trackEvent, quitAction );
 }
+
 export function nextGuidedTourStep( { tour = 'main', stepName } ) {
 	const nextAction = {
 		type: GUIDED_TOUR_UPDATE,
@@ -67,4 +70,16 @@ export function nextGuidedTourStep( { tour = 'main', stepName } ) {
 	} );
 
 	return withAnalytics( trackEvent, nextAction );
+}
+
+export function addSeenGuidedTour( tourName, finished = false ) {
+	return ( dispatch, getState ) =>
+		dispatch( setPreference( 'guided-tours-history', [
+			...getPreference( getState(), 'guided-tours-history' ),
+			{
+				timestamp: Date.now(),
+				tourName,
+				finished,
+			}
+		] ) );
 }

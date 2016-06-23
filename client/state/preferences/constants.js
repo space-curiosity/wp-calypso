@@ -10,11 +10,11 @@ export const DEFAULT_PREFERENCES = {
 			items: {
 				type: 'object',
 				properties: {
-					tour: { type: 'string' },
+					tourName: { type: 'string' },
 					timestamp: { type: 'number', minimum: 0 },
 					finished: { type: 'boolean' },
 				},
-				required: [ 'tour', 'timestamp', 'finished' ],
+				required: [ 'tourName', 'timestamp', 'finished' ],
 				additionalProperties: false,
 			},
 		},

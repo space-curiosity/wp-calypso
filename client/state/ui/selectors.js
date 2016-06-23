@@ -78,3 +78,17 @@ export function isSectionIsomorphic( state ) {
 export function isPreviewShowing( state ) {
 	return get( state.ui, 'isPreviewShowing', false );
 }
+
+/**
+ * Returns a log of actions from certain types that have previously been
+ * dispatched for the current user.
+ *
+ * These actions are to be consumed by and inform Calypso's Guided Tours
+ * framework.
+ *
+ * @param  {Object}   state      Global state tree
+ * @return {Array}               Array of Redux actions, each with timestamp
+ */
+export function getActionLog( state ) {
+	return get( state.ui, 'actionLog', [] );
+}

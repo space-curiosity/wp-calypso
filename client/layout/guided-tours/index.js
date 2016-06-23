@@ -11,7 +11,7 @@ import { localize } from 'i18n-calypso';
  */
 import scrollTo from 'lib/scroll-to';
 import { getGuidedTourState } from 'state/ui/guided-tours/selectors';
-import { nextGuidedTourStep, quitGuidedTour } from 'state/ui/guided-tours/actions';
+import { nextGuidedTourStep, quitGuidedTour, addSeenGuidedTour } from 'state/ui/guided-tours/actions';
 import { errorNotice } from 'state/notices/actions';
 import { query } from './positioning';
 import {
@@ -23,8 +23,6 @@ import {
 } from './steps';
 import wait from './wait';
 import QueryPreferences from 'components/data/query-preferences';
-import { setPreference } from 'state/preferences/actions';
-import { getPreference } from 'state/preferences/selectors';
 
 const debug = debugFactory( 'calypso:guided-tours' );
 
@@ -44,8 +42,7 @@ class GuidedTours extends Component {
 	}
 
 	shouldComponentUpdate( nextProps ) {
-		return this.props.tourState !== nextProps.tourState ||
-			this.props.guidedToursHistory !== nextProps.guidedToursHistory;
+		return this.props.tourState !== nextProps.tourState;
 	}
 
 	componentWillUpdate( nextProps ) {
@@ -102,6 +99,7 @@ class GuidedTours extends Component {
 		this.props.quitGuidedTour( Object.assign( {
 			stepName: this.props.tourState.stepName,
 		}, options ) );
+		this.props.addSeenGuidedTour( this.props.tourState.tour, options.finished );
 	}
 
 	finish() {
@@ -140,10 +138,9 @@ class GuidedTours extends Component {
 
 export default connect( ( state ) => ( {
 	tourState: getGuidedTourState( state ),
-	guidedToursHistory: getPreference( state, 'guided-tours-history' ),
 } ), {
 	nextGuidedTourStep,
 	quitGuidedTour,
 	errorNotice,
-	setGuidedToursHistory: setPreference.bind( null, 'guided-tours-history' ),
+	addSeenGuidedTour,
 } )( localize( GuidedTours ) );
