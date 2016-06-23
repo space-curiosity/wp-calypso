@@ -82,6 +82,7 @@
 		"settings/security/monitor": true,
 		"settings/security/scan": false,
 		"sidebar-drafts-count": true,
+		"stats/first-view": false,
 		"support-user": true,
 		"sync-handler": true,
 		"upgrades/checkout": true,
