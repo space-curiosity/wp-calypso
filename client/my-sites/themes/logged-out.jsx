@@ -12,7 +12,7 @@ import merge from 'lodash/merge';
 import Main from 'components/main';
 import { signup } from 'state/themes/actions' ;
 import ThemePreview from './theme-preview';
-import ThemePickButton from './theme-pick-button';
+import ThemePickButton from 'my-sites/theme/theme-pick-button';
 import ThemesSelection from './themes-selection';
 import { getSignupUrl, getDetailsUrl, getSupportUrl, isPremium, addTracking } from './helpers';
 import actionLabels from './action-labels';

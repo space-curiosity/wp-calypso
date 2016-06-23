@@ -12,7 +12,7 @@ import merge from 'lodash/merge';
 import Main from 'components/main';
 import { customize, purchase, activate } from 'state/themes/actions';
 import ThemePreview from './theme-preview';
-import ThemePickButton from './theme-pick-button';
+import ThemePickButton from 'my-sites/theme/theme-pick-button';
 import SidebarNavigation from 'my-sites/sidebar-navigation';
 import ThemesSiteSelectorModal from './themes-site-selector-modal';
 import ThemesSelection from './themes-selection';

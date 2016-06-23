@@ -13,7 +13,7 @@ import mapValues from 'lodash/mapValues';
 import Main from 'components/main';
 import { customize, purchase, activate } from 'state/themes/actions';
 import ThemePreview from './theme-preview';
-import ThemePickButton from './theme-pick-button';
+import ThemePickButton from 'my-sites/theme/theme-pick-button';
 import CurrentTheme from 'my-sites/themes/current-theme';
 import SidebarNavigation from 'my-sites/sidebar-navigation';
 import ThanksModal from 'my-sites/themes/thanks-modal';

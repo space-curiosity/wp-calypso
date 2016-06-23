@@ -10,6 +10,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import i18n from 'i18n-calypso';
 import titlecase from 'to-title-case';
+import pick from 'lodash/pick';
 
 /**
  * Internal dependencies
@@ -33,8 +34,6 @@ import { isPremium, getForumUrl } from 'my-sites/themes/helpers';
 import ThanksModal from 'my-sites/themes/thanks-modal';
 import QueryCurrentTheme from 'components/data/query-current-theme';
 import { getCurrentTheme } from 'state/themes/current-theme/selectors';
-import ThemesSiteSelectorModal from 'my-sites/themes/themes-site-selector-modal';
-import actionLabels from 'my-sites/themes/action-labels';
 import { getBackPath } from 'state/themes/themes-ui/selectors';
 import EmptyContentComponent from 'components/empty-content';
 import ThemePreview from 'my-sites/themes/theme-preview';
@@ -83,26 +82,8 @@ const ThemeSheet = React.createClass( {
 		this.setState( { selectedAction: null } );
 	},
 
-	onCustomize() {
-		this.props.customize( this.props, this.props.selectedSite );
-	},
-
-	onPickTheme() {
-		if ( ! this.props.isLoggedIn ) {
-			return this.props.signup( this.props );
-		} else if ( isPremium( this.props ) ) {
-			// TODO: check theme is not already purchased
-			return this.selectSiteAndDispatch( 'purchase' );
-		}
-		this.selectSiteAndDispatch( 'activate' );
-	},
-
-	selectSiteAndDispatch( action ) {
-		if ( this.props.selectedSite ) {
-			this.props[ action ]( this.props, this.props.selectedSite, 'showcase-sheet' );
-		} else {
-			this.setState( { selectedAction: action } );
-		}
+	getTheme() {
+		return pick( this.props, [ 'id', 'name', 'author', 'screenshot', 'price', 'description', 'descriptionLong', 'supportDocumentation', 'download', 'taxonomies', 'stylesheet', 'active', 'purchased' ] );
 	},
 
 	getValidSections() {
@@ -264,13 +245,7 @@ const ThemeSheet = React.createClass( {
 				theme={ this.props }
 				onClose={ this.togglePreview }
 			>
-				<ThemePickButton
-					price={ this.props.price }
-					themeId={ this.props.id }
-					currentTheme={ this.props.currentTheme }
-					onPickTheme={ this.onPickTheme }
-					onCustomize={ this.onCustomize }
-				/>
+				<ThemePickButton theme={ this.getTheme() } />
 			</ThemePreview>
 		);
 	},
@@ -313,25 +288,12 @@ const ThemeSheet = React.createClass( {
 				<ThanksModal
 					site={ this.props.selectedSite }
 					source={ 'details' }/>
-				{ this.state.selectedAction && <ThemesSiteSelectorModal
-					name={ this.state.selectedAction }
-					label={ actionLabels[ this.state.selectedAction ].label }
-					header={ actionLabels[ this.state.selectedAction ].header }
-					selectedTheme={ this.props }
-					onHide={ this.hideSiteSelectorModal }
-					action={ this.props[ this.state.selectedAction ] }
-					sourcePath={ `/theme/${ this.props.id }${ section ? '/' + section : '' }` }
-				/> }
 				{ this.state.showPreview && this.renderPreview() }
 				<HeaderCake className="themes__sheet-action-bar"
 							backHref={ this.props.backPath }
 							backText={ i18n.translate( 'All Themes' ) }>
 					<ThemePickButton className="themes_sheet-theme-pick-button"
-						price={ this.props.price }
-						themeId={ this.props.id }
-						currentTheme={ this.props.currentTheme }
-						onPickTheme={ this.onPickTheme }
-						onCustomize={ this.onCustomize }
+						theme={ this.getTheme() }
 					/>
 				</HeaderCake>
 				<div className="themes__sheet-columns">
