@@ -56,6 +56,13 @@ export default React.createClass( {
 						</div>
 
 						<Button onClick={ this.onDismiss }>Got it!</Button>
+
+						<div className="first-view__hide-preference">
+							<label>
+								<input type="checkbox" checked />
+								Don't show this again
+							</label>
+						</div>
 					</div>
 				) }
 			</RootChild>
