@@ -90,13 +90,6 @@ const ThemeSheet = React.createClass( {
 	onPickTheme() {
 		if ( ! this.props.isLoggedIn ) {
 			return this.props.signup( this.props );
-		}
-		this.selectSiteAndDispatch( 'activate' );
-	},
-
-	onPreviewButtonClick() {
-		if ( ! this.props.isLoggedIn ) {
-			return this.props.signup( this.props );
 		} else if ( isPremium( this.props ) ) {
 			// TODO: check theme is not already purchased
 			return this.selectSiteAndDispatch( 'purchase' );
@@ -266,15 +259,19 @@ const ThemeSheet = React.createClass( {
 	},
 
 	renderPreview() {
-		const buttonText = i18n.translate( 'Pick this design' );
-		const priceElement = <span>{ buttonText }<span className="themes__sheet-action-bar-cost">{ this.props.price }</span></span>;
-		const buttonLabel = ( this.isActive() ? buttonText : priceElement );
 		return(
 			<ThemePreview showPreview={ this.state.showPreview }
 				theme={ this.props }
 				onClose={ this.togglePreview }
-				buttonLabel={ buttonLabel }
-				onButtonClick={ this.onPreviewButtonClick } />
+			>
+				<ThemePickButton
+					price={ this.props.price }
+					themeId={ this.props.id }
+					currentTheme={ this.props.currentTheme }
+					onPickTheme={ this.onPickTheme }
+					onCustomize={ this.onCustomize }
+				/>
+			</ThemePreview>
 		);
 	},
 
@@ -329,7 +326,7 @@ const ThemeSheet = React.createClass( {
 				<HeaderCake className="themes__sheet-action-bar"
 							backHref={ this.props.backPath }
 							backText={ i18n.translate( 'All Themes' ) }>
-					<ThemePickButton
+					<ThemePickButton className="themes_sheet-theme-pick-button"
 						price={ this.props.price }
 						themeId={ this.props.id }
 						currentTheme={ this.props.currentTheme }
