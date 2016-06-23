@@ -111,6 +111,15 @@ export function getSitePostsForQuery( state, siteId, query ) {
 		return null;
 	}
 
+	// PostQueryManager is smart enough to return an array including undefined
+	// entries if it knows that a page of results exists for the query (via a
+	// previous request's `found` value) but the items haven't been received.
+	// While we could impose this on the developer to accommodate, instead we
+	// simply return null when any `undefined` entries exist in the set.
+	if ( -1 !== posts.indexOf( undefined ) ) {
+		return null;
+	}
+
 	return posts.map( ( post ) => getNormalizedPost( state, post.global_ID ) );
 }
 
