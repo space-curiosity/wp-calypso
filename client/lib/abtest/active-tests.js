@@ -120,7 +120,7 @@ module.exports = {
 		allowExistingUsers: false,
 	},
 	browserNotifications: {
-		datestamp: '20160707',
+		datestamp: '20160624',
 		variations: {
 			disabled: 95,
 			enabled: 5,
