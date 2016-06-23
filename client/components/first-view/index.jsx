@@ -41,13 +41,13 @@ export default React.createClass( {
 						{ this.props.children }
 					</div>
 
-					<Button onClick={ this.onClick }>Got it!</Button>
+					<Button onClick={ this.onDismiss }>Got it!</Button>
 				</div>
 			</RootChild>
 		);
 	},
 
-	onClick: function() {
+	onDismiss: function() {
 		if ( this.props.onDismiss ) {
 			this.props.onDismiss();
 		}

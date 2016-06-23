@@ -87,8 +87,8 @@ export default React.createClass( {
 
 
 		return (
-			<FirstViewable firstViewActive={ this.state.firstViewActive }>
-				<FirstView active={ this.state.firstViewActive } onDismiss={ this.onFirstViewDismiss }>
+			<FirstViewable firstViewActive={ this.state.firstViewActive } onFirstViewDismiss={ this.onFirstViewDismiss }>
+				<FirstView>
 						TODO: First view content goes here!
 				</FirstView>
 				<SidebarNavigation />
