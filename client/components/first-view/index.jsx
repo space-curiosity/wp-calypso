@@ -17,7 +17,7 @@ export default React.createClass( {
 		}
 	},
 
-	componentDidUpdate( prevProps ) {
+	componentDidUpdate() {
 		if ( this.props.active ) {
 			document.documentElement.classList.add( 'no-scroll' );
 		} else {

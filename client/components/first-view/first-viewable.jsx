@@ -10,11 +10,32 @@ import classNames from 'classnames';
 import FirstView from './';
 
 export default React.createClass( {
-	render: function() {
+	getInitialState() {
+		return {
+			firstViewActive: false
+		};
+	},
+
+	componentDidMount() {
+		if ( this.props.firstViewActive ) {
+			// we have to slightly delay this so that the CSS transition will show
+			process.nextTick( this.showFirstView );
+		}
+	},
+
+	componentWillReceiveProps( nextProps ) {
+		this.setState( {
+			firstViewActive: nextProps.firstViewActive
+		} );
+	},
+
+	render() {
+		const firstViewActive = this.state.firstViewActive;
+
 		const children = React.Children.map( this.props.children, function( child ) {
 			if ( child.type === FirstView ) {
 				return React.cloneElement( child, {
-					active: this.props.firstViewActive,
+					active: firstViewActive,
 					onDismiss: this.props.onFirstViewDismiss
 				} );
 			}
@@ -23,7 +44,7 @@ export default React.createClass( {
 		}, this );
 
 		const classes = classNames( 'first-viewable', {
-			'first-view-active': this.props.firstViewActive
+			'first-view-active': firstViewActive
 		} );
 
 		return (
@@ -31,5 +52,9 @@ export default React.createClass( {
 				{ children }
 			</div>
 		);
+	},
+
+	showFirstView() {
+		this.setState( { firstViewActive: true } );
 	}
 } );

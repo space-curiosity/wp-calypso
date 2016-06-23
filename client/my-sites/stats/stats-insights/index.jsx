@@ -3,7 +3,6 @@
 */
 import React, { PropTypes } from 'react';
 import i18n from 'i18n-calypso';
-import classNames from 'classnames';
 
 /**
  * Internal dependencies
@@ -80,11 +79,6 @@ export default React.createClass( {
 							dataList={ this.props.tagsList }
 							beforeNavigate={ this.updateScrollPosition } />;
 		}
-
-		const mainViewClasses = classNames( 'first-view-main-view', {
-			inactive: this.state.firstViewActive
-		} );
-
 
 		return (
 			<FirstViewable firstViewActive={ this.state.firstViewActive } onFirstViewDismiss={ this.onFirstViewDismiss }>
